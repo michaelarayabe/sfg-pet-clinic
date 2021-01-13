@@ -1,2 +1,2 @@
 # sfg-pet-clinic
-SFT Pet Clinic made through following Udemy tutorial
+SFG Pet Clinic made through following Udemy tutorial

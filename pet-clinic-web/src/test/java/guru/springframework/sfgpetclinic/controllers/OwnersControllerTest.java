@@ -1,6 +1,8 @@
 package guru.springframework.sfgpetclinic.controllers;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import guru.springframework.sfgpetclinic.builder.OwnerBuilder;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.services.OwnerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,8 +38,8 @@ class OwnersControllerTest {
     @BeforeEach
     void setUp() {
         owners = new HashSet<>();
-        owners.add(Owner.builder().id(1l).build());
-        owners.add(Owner.builder().id(2l).build());
+        owners.add(new OwnerBuilder(1l).build());
+        owners.add(new OwnerBuilder(2l).build());
 
         mockMvc = MockMvcBuilders
                 .standaloneSetup(controller)

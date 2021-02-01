@@ -1,5 +1,6 @@
 package guru.springframework.sfgpetclinic.services.springdatajpa;
 
+import guru.springframework.sfgpetclinic.builder.OwnerBuilder;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.repositories.OwnerRepository;
 import guru.springframework.sfgpetclinic.repositories.PetRepository;
@@ -40,13 +41,14 @@ class OwnerSDJpaServiceTest {
 
     @BeforeEach
     void setUp() {
-        returnOwner = Owner.builder().id(1l).lastName(LAST_NAME).build();
+        returnOwner = new OwnerBuilder(1l).setLastName(LAST_NAME).build();
+        //returnOwner = Owner.builder().id(1l).lastName(LAST_NAME).build();
     }
 
     @Test
     void findByLastName() {
 
-        Owner returnOwner = Owner.builder().id(1l).lastName(LAST_NAME).build();
+        //Owner returnOwner = Owner.builder().id(1l).lastName(LAST_NAME).build();
 
         when(ownerRepository.findByLastName(any())).thenReturn(returnOwner);
 
@@ -60,8 +62,10 @@ class OwnerSDJpaServiceTest {
     @Test
     void findAll() {
         Set<Owner> returnOwnersSet = new HashSet<>();
-        returnOwnersSet.add(Owner.builder().id(1l).build());
-        returnOwnersSet.add(Owner.builder().id(2l).build());
+        returnOwnersSet.add(new OwnerBuilder(1l).build());
+        //returnOwnersSet.add(Owner.builder().id(1l).build());
+        returnOwnersSet.add(new OwnerBuilder(2l).build());
+        //returnOwnersSet.add(Owner.builder().id(2l).build());
 
         when(ownerRepository.findAll()).thenReturn(returnOwnersSet);
 
@@ -93,7 +97,7 @@ class OwnerSDJpaServiceTest {
 
     @Test
     void save() {
-        Owner ownerToSave = Owner.builder().id(1L).build();
+        Owner ownerToSave = new OwnerBuilder(1l).build();
 
         when(ownerRepository.save(any())).thenReturn(returnOwner);
 

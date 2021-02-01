@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+//@Builder - took this out since written custom builder
 @Entity
 @Table(name = "owners")
 public class Owner extends Person {

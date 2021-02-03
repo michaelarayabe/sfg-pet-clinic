@@ -1,5 +1,7 @@
 package guru.springframework.sfgpetclinic.controllers;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import guru.springframework.sfgpetclinic.builder.OwnerBuilder;
@@ -18,18 +20,17 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
-class OwnersControllerTest {
+class OwnerControllerTest {
 
     @Mock
     OwnerService ownerService;
 
     @InjectMocks
-    OwnersController controller;
+    OwnerController controller;
 
     Set<Owner> owners;
 
@@ -71,4 +72,15 @@ class OwnersControllerTest {
                 .andExpect(view().name("notimplemented"));
 
     }
+
+    @Test
+    void displayOwner() throws Exception {
+        when(ownerService.findById(anyLong())).thenReturn(new OwnerBuilder(1l).build());
+
+        mockMvc.perform(get("/owners/123"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownerDetails"))
+                .andExpect(model().attribute("owner", hasProperty("id", is(1l))));
+    }
+
 }

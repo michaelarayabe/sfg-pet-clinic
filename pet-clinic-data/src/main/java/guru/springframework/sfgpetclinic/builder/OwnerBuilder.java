@@ -14,6 +14,9 @@ public class OwnerBuilder {
     private String telephone;
     private Set<Pet> pets;
 
+    public OwnerBuilder() {
+    }
+
     public OwnerBuilder(Long id) {
         this.id = id;
     }
